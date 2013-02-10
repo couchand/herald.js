@@ -168,6 +168,10 @@ describe('Herald', function() {
         myHerald.dispatch( thing );
       });
 
+      it('returns a thenable', function() {
+        myHerald.then(function() {}).should.be.a.thenable;
+      });
+
       it('chains the results', function(done) {
         var thing = {};
         myHerald.then(function() {
@@ -215,6 +219,15 @@ describe('Herald', function() {
           return not_thing;
         });
         myHerald.dispatch( thing );
+      });
+
+      it('immediately calls callbacks when already dispatched', function(done) {
+        var thing = {};
+        myHerald.dispatch( thing );
+        myHerald.then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
       });
 
       it('calls immediate callbacks asynchronously', function(done) {
