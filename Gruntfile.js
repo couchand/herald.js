@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     });
 
     mocha.run(function(failures) {
-      done(failures);
+      done(failures?false:true);
     });
   });
 
