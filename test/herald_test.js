@@ -20,6 +20,16 @@ describe('Herald', function() {
     });
   });
 
+  describe('immediate()', function() {
+    it('is a function', function() {
+      herald.immediate.should.be.a('function');
+    });
+
+    it('returns a Herald', function() {
+      herald.immediate().should.be.a.thenable;
+    });
+  });
+
   describe('await()', function() {
     it('is a function', function() {
       herald.await.should.be.a('function');
