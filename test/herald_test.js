@@ -11,12 +11,22 @@ describe('Herald', function() {
     });
 
     it('creates new Heralds', function() {
-      herald().should.be.true;
+      herald().should.be.a.thenable;
     });
 
     it('creates them `awaiting`', function() {
       var myHerald = herald();
       myHerald.awaiting().should.be.true;
+    });
+  });
+
+  describe('await()', function() {
+    it('is a function', function() {
+      herald.await.should.be.a('function');
+    });
+
+    it('returns a Herald', function() {
+      herald.await().should.be.a.thenable;
     });
   });
 
