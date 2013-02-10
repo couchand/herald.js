@@ -50,6 +50,38 @@ describe('Herald', function() {
     it('returns a Herald', function() {
       herald.await().should.be.a.thenable;
     });
+
+    it('returns an immediate when passed a value', function(done) {
+      herald.await(42).then(function(res) {
+        res.should.equal(42);
+        done();
+      });
+    });
+
+    it('returns the original herald when passed a single herald', function() {
+      var myHerald = herald();
+      herald.await( myHerald ).should.equal( myHerald );
+    });
+
+    it('returns a composition of heralds when passed several', function(done) {
+      var itemA = {},
+          itemB = {},
+          itemC = {},
+          heraldA = herald(),
+          heraldB = herald(),
+          heraldC = herald();
+
+      herald.await( heraldA, heraldB, heraldC ).then(function(results) {
+        results[0].should.equal( itemA );
+        results[1].should.equal( itemB );
+        results[2].should.equal( itemC );
+        done();
+      });
+
+      heraldA.dispatch( itemA );
+      heraldB.dispatch( itemB );
+      heraldC.dispatch( itemC );
+    });
   });
 
   describe('#', function() {
