@@ -135,7 +135,7 @@ describe('Herald', function() {
 
       it('is not dispatched after dismiss', function() {
         myHerald.dismiss();
-        myHerald.dispatched().should.be.false;;
+        myHerald.dispatched().should.be.false;
       });
 
       it('is dismissed after dismiss', function() {
