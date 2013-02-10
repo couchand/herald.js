@@ -37,6 +37,17 @@ module.exports = function(grunt) {
     chai.should();
     chai.use( sinonChai );
 
+    var flag = require('./node_modules/chai/lib/chai/utils/flag.js');
+
+    chai.Assertion.addProperty('thenable', function() {
+      this.assert(
+        flag(this, 'object') && flag(this, 'object').then,
+        'expected #{this} to be a thenable',
+        'expected #{this} not to be a thenable',
+        this.negate ? false : true
+      );
+    });
+
     this.files.forEach(function(fileObj) {
       var files = grunt.file.expand({nonull: true}, fileObj.src);
 
