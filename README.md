@@ -22,6 +22,8 @@ This project started after spending much time thinking about asychronous coding,
  * <https://gist.github.com/couchand/1485a952b56329c6b122>
  * <https://gist.github.com/couchand/a966d762668f93f7d0b8>
 
+The API was also significantly influenced by the Chai Should assertion framework.
+
 Nuts and Bolts
 --------------
 
