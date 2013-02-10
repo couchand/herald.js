@@ -11,12 +11,12 @@ describe('Herald', function() {
     });
 
     it('creates new Heralds', function() {
-      herald().should.be.ok;
+      herald().should.be.true;
     });
 
     it('creates them `awaiting`', function() {
       var myHerald = herald();
-      myHerald.awaiting().should.be.ok;
+      myHerald.awaiting().should.be.true;
     });
   });
 
@@ -33,22 +33,22 @@ describe('Herald', function() {
       });
 
       it('returns true initially', function() {
-        myHerald.awaiting().should.be.ok;
+        myHerald.awaiting().should.be.true;
       });
 
       it('returns false after dispatching', function() {
         myHerald.dispatch();
-        myHerald.awaiting().should.not.be.ok;
+        myHerald.awaiting().should.be.false;
       });
 
       it('returns false after dismissing', function() {
         myHerald.dismiss();
-        myHerald.awaiting().should.not.be.ok;
+        myHerald.awaiting().should.be.false;
       });
 
       it('returns true after notifying', function() {
         myHerald.notify();
-        myHerald.awaiting().should.be.ok;
+        myHerald.awaiting().should.be.true;
       });
     });
 
@@ -58,22 +58,22 @@ describe('Herald', function() {
       });
 
       it('returns false initially', function() {
-        myHerald.dispatched().should.not.be.ok;
+        myHerald.dispatched().should.be.false;
       });
 
       it('returns true after dispatching', function() {
         myHerald.dispatch();
-        myHerald.dispatched().should.be.ok;
+        myHerald.dispatched().should.be.true;
       });
 
       it('returns false after dismissing', function() {
         myHerald.dismiss();
-        myHerald.dispatched().should.not.be.ok;
+        myHerald.dispatched().should.be.false;
       });
 
       it('returns false after notifying', function() {
         myHerald.notify();
-        myHerald.dispatched().should.not.be.ok;
+        myHerald.dispatched().should.be.false;
       });
     });
 
@@ -83,22 +83,22 @@ describe('Herald', function() {
       });
 
       it('returns false initially', function() {
-        myHerald.dismissed().should.not.be.ok;
+        myHerald.dismissed().should.be.false;
       });
 
       it('returns false after dispatching', function() {
         myHerald.dispatch();
-        myHerald.dismissed().should.not.be.ok;
+        myHerald.dismissed().should.be.false;
       });
 
       it('returns true after dismissing', function() {
         myHerald.dismiss();
-        myHerald.dismissed().should.be.ok;
+        myHerald.dismissed().should.be.true;
       });
 
       it('returns false after notifying', function() {
         myHerald.notify();
-        myHerald.dismissed().should.not.be.ok;
+        myHerald.dismissed().should.be.false;
       });
     });
 
@@ -109,17 +109,17 @@ describe('Herald', function() {
 
       it('stops waiting after dispatch', function() {
         myHerald.dispatch();
-        myHerald.awaiting().should.not.be.ok;
+        myHerald.awaiting().should.be.false;
       });
 
       it('is dispatched after dispatch', function() {
         myHerald.dispatch();
-        myHerald.dispatched().should.be.ok;
+        myHerald.dispatched().should.be.true;
       });
 
       it('is not dismissed after dispatch', function() {
         myHerald.dispatch();
-        myHerald.dismissed().should.not.be.ok;
+        myHerald.dismissed().should.be.false;
       });
     });
 
@@ -130,17 +130,17 @@ describe('Herald', function() {
 
       it('stops waiting after dismiss', function() {
         myHerald.dismiss();
-        myHerald.awaiting().should.not.be.ok;
+        myHerald.awaiting().should.be.false;
       });
 
       it('is not dispatched after dismiss', function() {
         myHerald.dismiss();
-        myHerald.dispatched().should.not.be.ok;
+        myHerald.dispatched().should.be.false;;
       });
 
       it('is dismissed after dismiss', function() {
         myHerald.dismiss();
-        myHerald.dismissed().should.be.ok;
+        myHerald.dismissed().should.be.true;
       });
     });
   });
