@@ -157,6 +157,67 @@ describe('Herald', function() {
         });
         myHerald.dispatch( thing );
       });
+
+      it('chains the results', function(done) {
+        var thing = {};
+        myHerald.then(function() {
+          return thing;
+        }).then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dispatch();
+      });
+
+      it('chains dependent heralds', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.then(function(res) {
+          return dependentHerald;
+        }).then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dispatch();
+        dependentHerald.dispatch( thing );
+      });
+
+      it('fans out', function(done) {
+        var num_to_go = 3;
+        var thing = {};
+        var not_thing = {};
+        var check_finish = function(res) {
+          res.should.equal( thing );
+          if ( 0 === --num_to_go ) {
+            done();
+          }
+        };
+        myHerald.then(function(res) {
+          check_finish( res );
+          return not_thing;
+        });
+        myHerald.then(function(res) {
+          check_finish( res );
+          return not_thing;
+        });
+        myHerald.then(function(res) {
+          check_finish( res );
+          return not_thing;
+        });
+        myHerald.dispatch( thing );
+      });
+
+      it('calls immediate callbacks asynchronously', function(done) {
+        var str = '';
+        myHerald.dispatch('3');
+        str += '1';
+        myHerald.then(function(digit) {
+          str += digit;
+          str.should.equal('123');
+          done();
+        });
+        str += '2';
+      });
     });
   });
 });
