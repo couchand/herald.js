@@ -83,7 +83,9 @@ We dispense with the limitations of the Promises/A spec as well as the complexit
  * To await a herald's `dismissal`, use the `rescue` method
  * To await a `notification` to the herald, use the `listen` method
 
-Those names suck as much as jQuery's.  Let's think of better ones.
+<del>Those names suck as much as jQuery's.  Let's think of better ones.</del>
+
+These names actually seem pretty good.  (Way better than the previous names `watch` and `observe` or something).
 
 Herald management
 -----------------
