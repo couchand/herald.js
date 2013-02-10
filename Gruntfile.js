@@ -15,15 +15,38 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'lib/*.js',
+        'test/*.js'
       ],
       options: {
         jshintrc: '.jshintrc',
       },
     },
+    test: {
+      all: ['test/*.js']
+    }
+  });
+
+  grunt.registerMultiTask('test', 'Run mocha tests', function() {
+    var Mocha = require('mocha');
+    var mocha = new Mocha();
+    var done = this.async();
+    var options = this.options();
+
+    this.files.forEach(function(fileObj) {
+      var files = grunt.file.expand({nonull: true}, fileObj.src);
+
+      files.forEach(function(file) {
+        mocha.addFile( file );
+      });
+    });
+
+    mocha.run(function(failures) {
+      done(failures);
+    });
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'test']);
 
 };
