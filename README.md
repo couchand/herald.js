@@ -1,8 +1,6 @@
 Herald: A New (Promise-like) API
 ================================
 
-<del>We probably want to find a different name to avoid confusion.  What's like a promise that's not a promise?</del>
-
 From the Promises/A+ spec:
 >  A promise represents a value that may not be available yet. The primary method for interacting with a promise is its `then` method.
 
@@ -13,6 +11,16 @@ _A herald represents a piece of information.  In an asynchronous world, you must
 This object is more than just a promise.  It has just a little bit of semantics:  it carries a little information.  It is a Herald.
 
 I've only just been writing this gist and already I like how the terminology anthropomorphizes the software pattern. 
+
+History
+-------
+
+This project started after spending much time thinking about asychronous coding, specifically while working on the force.js project.  The philosophy and strategy behind this library was first described in a series of gists.
+
+ * <https://gist.github.com/couchand/d851e4ea181a466034d8>
+ * <https://gist.github.com/couchand/fe83a3820fe153d227cd>
+ * <https://gist.github.com/couchand/1485a952b56329c6b122>
+ * <https://gist.github.com/couchand/a966d762668f93f7d0b8>
 
 Nuts and Bolts
 --------------
