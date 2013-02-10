@@ -1,5 +1,5 @@
 /*jshint expr: true */
-/*globals describe: true, it: true, before: true */
+/*globals describe: true, it: true, beforeEach: true */
 "use strict";
 
 var herald = require('../lib/herald.js');
@@ -33,7 +33,7 @@ describe('Herald', function() {
   describe('#', function() {
     var myHerald;
 
-    before(function() {
+    beforeEach(function() {
       myHerald = herald();
     });
 
