@@ -28,9 +28,14 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('test', 'Run mocha tests', function() {
     var Mocha = require('mocha');
+    var chai = require('chai');
+    var sinonChai = require('sinon-chai');
     var mocha = new Mocha();
     var done = this.async();
     var options = this.options();
+
+    chai.should();
+    chai.use( sinonChai );
 
     this.files.forEach(function(fileObj) {
       var files = grunt.file.expand({nonull: true}, fileObj.src);
