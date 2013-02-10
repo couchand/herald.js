@@ -1,0 +1,39 @@
+{
+  "name": "herald-js",
+  "description": "A new promise-like API.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/couchand/herald.js",
+  "author": {
+    "name": "Andrew Couch",
+    "email": "andy@couchand.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/couchand/herald.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/couchand/herald.js/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/couchand/herald.js/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "node-promise": "~0.5.5"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "0.1.1rc6",
+    "grunt-contrib-clean": "0.4.0rc6",
+    "grunt": "0.4.0rc6"
+  },
+  "keywords": []
+}
