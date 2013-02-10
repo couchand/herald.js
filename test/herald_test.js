@@ -143,5 +143,20 @@ describe('Herald', function() {
         myHerald.dismissed().should.be.true;
       });
     });
+
+    describe('then()', function() {
+      it('is a function', function() {
+        myHerald.then.should.be.a('function');
+      });
+
+      it('registers dispatch callback', function(done) {
+        var thing = {};
+        myHerald.then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dispatch( thing );
+      });
+    });
   });
 });
