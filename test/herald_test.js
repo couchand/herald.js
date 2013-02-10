@@ -28,6 +28,18 @@ describe('Herald', function() {
     it('returns a Herald', function() {
       herald.immediate().should.be.a.thenable;
     });
+
+    it('is dispatched immediately', function() {
+      herald.immediate().dispatched().should.be.true;
+    });
+
+    it('is dispatched with the value', function(done) {
+      var thing = {};
+      herald.immediate( thing ).then(function(res) {
+        res.should.equal( thing );
+        done();
+      });
+    });
   });
 
   describe('await()', function() {
