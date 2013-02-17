@@ -51,19 +51,19 @@ describe('Herald', function() {
       herald.await().should.be.a.thenable;
     });
 
-    it.skip('returns an immediate when passed a value', function(done) {
+    it('returns an immediate when passed a value', function(done) {
       herald.await(42).then(function(res) {
         res.should.equal(42);
         done();
       });
     });
 
-    it.skip('returns the original herald when passed a single herald', function() {
+    it('returns the original herald when passed a single herald', function() {
       var myHerald = herald();
       herald.await( myHerald ).should.equal( myHerald );
     });
 
-    it.skip('returns a composition of heralds when passed several', function(done) {
+    it('returns a composition of heralds when passed several', function(done) {
       var itemA = {},
           itemB = {},
           itemC = {},
