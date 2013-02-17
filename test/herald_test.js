@@ -222,11 +222,11 @@ describe('Herald', function() {
         myHerald.dispatch( thing );
       });
 
-      it.skip('returns a thenable', function() {
+      it('returns a thenable', function() {
         myHerald.then(function() {}).should.be.a.thenable;
       });
 
-      it.skip('chains the results', function(done) {
+      it('chains the results', function(done) {
         var thing = {};
         myHerald.then(function() {
           return thing;
@@ -237,7 +237,7 @@ describe('Herald', function() {
         myHerald.dispatch();
       });
 
-      it.skip('chains dependent heralds', function(done) {
+      it('chains dependent heralds', function(done) {
         var thing = {},
             dependentHerald = herald();
         myHerald.then(function(res) {
