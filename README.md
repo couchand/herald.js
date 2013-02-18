@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/couchand/herald.js.png?branch=master)](https://travis-ci.org/couchand/herald.js)
+
 Herald: A New (Promise-like) API
 ================================
 
