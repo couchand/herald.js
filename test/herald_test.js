@@ -250,6 +250,19 @@ describe('Herald', function() {
         dependentHerald.dispatch( thing );
       });
 
+      it('chains immediate dependent heralds', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.then(function(res) {
+          return dependentHerald;
+        }).then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        dependentHerald.dispatch( thing );
+        myHerald.dispatch();
+      });
+
       it('fans out', function(done) {
         var num_to_go = 3;
         var thing = {};
