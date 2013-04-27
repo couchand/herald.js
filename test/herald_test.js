@@ -309,5 +309,20 @@ describe('Herald', function() {
         str += '2';
       });
     });
+
+    describe('rescue()', function() {
+      it('is a function', function() {
+        myHerald.rescue.should.be.a('function');
+      });
+
+      it('registers a dismiss callback', function(done) {
+        var thing = {};
+        myHerald.rescue(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dismiss( thing );
+      });
+    });
   });
 });
