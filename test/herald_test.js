@@ -338,6 +338,32 @@ describe('Herald', function() {
         });
         myHerald.dismiss();
       });
+
+      it('chains dependent heralds', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.rescue(function(res) {
+          return dependentHerald;
+        }).then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dismiss();
+        dependentHerald.dispatch( thing );
+      });
+
+      it('chains immediate dependent heralds', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.rescue(function(res) {
+          return dependentHerald;
+        }).then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        dependentHerald.dispatch( thing );
+        myHerald.dismiss();
+      });
     });
   });
 });
