@@ -239,14 +239,18 @@ describe('Herald', function() {
 
       it('chains dependent heralds', function(done) {
         var thing = {},
+            intermediateHerald,
             dependentHerald = herald();
-        myHerald.then(function(res) {
+        intermediateHerald = myHerald.then(function(res) {
           return dependentHerald;
-        }).then(function(res) {
+        });
+        intermediateHerald.then(function(res) {
           res.should.equal( thing );
+          intermediateHerald.dispatched().should.be.true;
           done();
         });
         myHerald.dispatch();
+        intermediateHerald.dispatched().should.be.false;
         dependentHerald.dispatch( thing );
       });
 
