@@ -323,6 +323,21 @@ describe('Herald', function() {
         });
         myHerald.dismiss( thing );
       });
+
+      it('returns a thenable', function() {
+        myHerald.rescue(function() {}).should.be.a.thenable;
+      });
+
+      it('chains the results', function(done) {
+        var thing = {};
+        myHerald.rescue(function() {
+          return thing;
+        }).then(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dismiss();
+      });
     });
   });
 });
