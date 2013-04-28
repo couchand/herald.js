@@ -269,6 +269,32 @@ describe('Herald', function() {
         myHerald.dispatch();
       });
 
+      it('chains dependent rescues', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.then(function(res) {
+          return dependentHerald;
+        }).rescue(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dispatch();
+        dependentHerald.dismiss( thing );
+      });
+
+      it('chains immediate dependent rescues', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.then(function(res) {
+          return dependentHerald;
+        }).rescue(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        dependentHerald.dismiss( thing );
+        myHerald.dispatch();
+      });
+
       it('fans out', function(done) {
         var num_to_go = 3;
         var thing = {};
@@ -368,6 +394,32 @@ describe('Herald', function() {
           done();
         });
         dependentHerald.dispatch( thing );
+        myHerald.dismiss();
+      });
+
+      it('chains dependent rescues', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.rescue(function(res) {
+          return dependentHerald;
+        }).rescue(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        myHerald.dismiss();
+        dependentHerald.dismiss( thing );
+      });
+
+      it('chains immediate dependent rescues', function(done) {
+        var thing = {},
+            dependentHerald = herald();
+        myHerald.rescue(function(res) {
+          return dependentHerald;
+        }).rescue(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+        dependentHerald.dismiss( thing );
         myHerald.dismiss();
       });
     });
