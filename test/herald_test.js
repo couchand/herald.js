@@ -422,6 +422,52 @@ describe('Herald', function() {
         dependentHerald.dismiss( thing );
         myHerald.dismiss();
       });
+
+      it('fans out', function(done) {
+        var num_to_go = 3;
+        var thing = {};
+        var not_thing = {};
+        var check_finish = function(res) {
+          res.should.equal( thing );
+          if ( 0 === --num_to_go ) {
+            done();
+          }
+        };
+        myHerald.rescue(function(res) {
+          check_finish( res );
+          return not_thing;
+        });
+        myHerald.rescue(function(res) {
+          check_finish( res );
+          return not_thing;
+        });
+        myHerald.rescue(function(res) {
+          check_finish( res );
+          return not_thing;
+        });
+        myHerald.dismiss( thing );
+      });
+
+      it('immediately calls callbacks when already dismissed', function(done) {
+        var thing = {};
+        myHerald.dismiss( thing );
+        myHerald.rescue(function(res) {
+          res.should.equal( thing );
+          done();
+        });
+      });
+
+      it('calls immediate callbacks asynchronously', function(done) {
+        var str = '';
+        myHerald.dismiss('3');
+        str += '1';
+        myHerald.rescue(function(digit) {
+          str += digit;
+          str.should.equal('123');
+          done();
+        });
+        str += '2';
+      });
     });
   });
 });
